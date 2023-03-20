@@ -6,11 +6,7 @@ import classes from './PostsList.module.css'
 import NewPost from './NewPost';
 import { useState } from 'react';
 
-function PostsList() {
-  const [modalIsVisible, setModalIsVisible] = useState(true)
-  function hideModalHandler(e) {
-    setModalIsVisible(false)
-  }
+function PostsList(props) {
 
   const [body, setEnteredBody] = useState('')
   function bodyChangedHandler(e) {
@@ -22,9 +18,9 @@ function PostsList() {
     setEnteredName(e.target.value)
   }
   let modalContent ;
-  if(modalIsVisible)
+  if(props.isPosting)
   {
-    modalContent = <Modal onClose={hideModalHandler}>
+    modalContent = <Modal onClose={props.onStopPosting}>
     <NewPost
       onBodyChange={bodyChangedHandler}
       onNameChange={nameChangedHandler}
