@@ -1,0 +1,28 @@
+import classes from './NewPost.module.css'
+
+function NewPost(props) {
+  return (
+    // <form >
+
+    //     <input type="text" placeholder="body" onChange={props.onBodyChange}/>
+    //     <br />
+    //     <input type="text" placeholder="name" onChange={props.onNameChange}/>
+        
+    // </form>
+
+
+    <form className={classes.form}>
+      <p>
+        <label htmlFor="body">Text</label>
+        <textarea id="body" required rows={3} onChange={props.onBodyChange} />
+      </p>
+      <p>
+        <label htmlFor="name">Your name</label>
+        <input type="text" id="name" required  onChange={props.onNameChange}/>
+      </p>
+    </form>
+
+  );
+}
+
+export default NewPost;
