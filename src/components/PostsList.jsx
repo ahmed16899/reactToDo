@@ -8,22 +8,21 @@ import { useState } from 'react';
 
 function PostsList(props) {
 
-  const [body, setEnteredBody] = useState('')
-  function bodyChangedHandler(e) {
-    setEnteredBody(e.target.value)
-  }
-
-  const [name, setEnteredName] = useState('')
-  function nameChangedHandler(e) {
-    setEnteredName(e.target.value)
-  }
+ const [posts , setPosts]=useState([]);
+ function addPostHandler(postData)
+ {
+  //setPosts([postData , ...posts])
+  
+  setPosts((existingPosts)=>[postData , ...existingPosts] )
+  console.log(posts)
+ }
   let modalContent ;
   if(props.isPosting)
   {
     modalContent = <Modal onClose={props.onStopPosting}>
     <NewPost
-      onBodyChange={bodyChangedHandler}
-      onNameChange={nameChangedHandler}
+      onCancel={props.onStopPosting}
+      onAddPost={addPostHandler}
     />
   </Modal>
   }
@@ -34,13 +33,18 @@ function PostsList(props) {
     <>
       {modalContent}
 
+      {posts.length>0 && 
+        <ul className={classes.posts}>
+        {posts.map((post)=>  <Post key={post.body} name={post.name} body={post.body}/>  )}
+      </ul>}
 
-      <ul className={classes.posts}>
-        <Post name={name} body={body} />
-        <Post name={name} body={body} />
-        <Post name={name} body={body} />
-        <Post name={name} body={body} />
-      </ul>
+      {posts.length===0 && 
+        <div style={{textAlign:'center' , color:'white'}}>
+              <h2>There is No posts ...</h2>
+              <p>Add some .</p>
+        </div>
+        }
+      
 
     </>
 
