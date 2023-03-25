@@ -7,17 +7,17 @@ import { useState } from 'react';
 
 
 function App() {
-  const [modalIsVisible, setModalIsVisible] = useState(true)
+  const [modalIsVisible, setModalIsVisible] = useState(false)
   function hideModalHandler(e) {
     setModalIsVisible(false)
   }
   function showModalHandler(e) {
     setModalIsVisible(true)
   }
-
+ // <MainHeader onCreatePost={showModalHandler}/>
   return (
     <>
-    <MainHeader onCreatePost={showModalHandler}/>
+   
     <main>
     <PostsList isPosting={modalIsVisible} onStopPosting={hideModalHandler}/>
     </main>
